@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace vega.Models
 {
@@ -10,7 +11,7 @@ namespace vega.Models
 
         public Make()
         {
-            Models = new CollectionExtensions<Model>();
+            Models = new Collection<Model>();
         }
     }
 }
