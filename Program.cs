@@ -19,12 +19,8 @@ namespace vega
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((builderContext, config) =>
-                {
-                    IHostingEnvironment env = builderContext.HostingEnvironment;
-                    config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                          .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
-                })
+            // -- https://joonasw.net/view/aspnet-core-2-configuration-changes
+            // -- .NET Core 2 no need to add ConfigureAppConfiguration function call
                 .UseStartup<Startup>()
                 .Build();
     }
