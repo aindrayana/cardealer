@@ -26,8 +26,13 @@ namespace vega.Controllers
             var vehicle = mapper.Map<VehicleResource, Vehicle>(vehicleResource);
             // add to context and save the changes
             context.Vehicles.Add(vehicle);
-            await context.SaveChangesAsync();
-            return Ok(vehicle);
+            await context.SaveChangesAsync();   // SaveChangesAsync has caused a loop on domain model
+
+            // add a new mapping on MappingProfile that do mapping reversal
+            // after save the changes we going to map the vehicle object back to vehicleResource
+            // this will prevent Self referencing loop errors
+            var result = mapper.Map<Vehicle, VehicleResource>(vehicle);
+            return Ok(result);
         }
     }
 }
