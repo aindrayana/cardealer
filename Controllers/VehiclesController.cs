@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,7 @@ namespace vega.Controllers
         {
             // map api resource to domain object
             var vehicle = mapper.Map<VehicleResource, Vehicle>(vehicleResource);
+            vehicle.LastUpdate = DateTime.Now;
             // add to context and save the changes
             context.Vehicles.Add(vehicle);
             await context.SaveChangesAsync();   // SaveChangesAsync has caused a loop on domain model
